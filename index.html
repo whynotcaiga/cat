@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #6a0dad; /* Changed to a different shade of purple */
+            background-color: #6a0dad;
             font-family: Arial, sans-serif;
             position: relative;
         }
@@ -54,16 +54,40 @@
             height: 100%;
             background: darkviolet;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             font-size: 24px;
             font-weight: bold;
-            cursor: pointer;
             transition: opacity 0.5s, transform 0.3s;
         }
-        .cover:hover {
-            transform: scale(1.05);
+        .cover input {
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            text-align: center;
+        }
+        .cover button {
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: none;
+            background-color: white;
+            color: darkviolet;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .hint {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .sad-cat {
+            display: none;
+            width: 100px;
+            margin-top: 10px;
         }
         .hidden-message {
             display: none;
@@ -102,7 +126,13 @@
         <img src="https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif" style="top: 80%; left: 30%;">
     </div>
     <div class="card">
-        <div class="cover" onclick="revealMessage()">💌 Tap to Open 💌</div>
+        <div class="cover">
+            💌 Enter Password to Open 💌
+            <input type="text" id="password" placeholder="Enter password">
+            <button onclick="checkPassword()">Submit</button>
+            <div class="hint">Hint: cat</div>
+            <img class="sad-cat" src="https://media.giphy.com/media/9J7tdYltWyXIY/giphy.gif" alt="Sad Cat">
+        </div>
         <div class="hidden-message">
             <h2 style="color: white;">Happy Valentine's Day! ❤️</h2>
             <div class="message">Type your message here...</div>
@@ -112,10 +142,23 @@
     </div>
 
     <script>
-        function revealMessage() {
-            document.querySelector('.cover').style.opacity = '0';
-            setTimeout(() => document.querySelector('.cover').style.display = 'none', 500);
-            document.querySelector('.hidden-message').style.display = 'block';
+        function checkPassword() {
+            let input = document.getElementById('password').value;
+            let sadCats = [
+                'https://media.giphy.com/media/JFawGLFMCJNDi/giphy.gif',
+                'https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif',
+                'https://media.giphy.com/media/VbnUQpnihPSIgIXuZv/giphy.gif'
+            ];
+            let sadCat = document.querySelector('.sad-cat');
+            let attempt = 0;
+            if (input === "Wednesday") {
+                document.querySelector('.cover').style.opacity = '0';
+                setTimeout(() => document.querySelector('.cover').style.display = 'none', 500);
+                document.querySelector('.hidden-message').style.display = 'block';
+            } else {
+                sadCat.style.display = 'block';
+                alert("Incorrect password. Try again!");
+            }
         }
     </script>
 </body>
