@@ -151,7 +151,7 @@
             ];
             let sadCat = document.querySelector('.sad-cat');
             let attempt = 0;
-            if (input === "Wednesday") {
+            if (input.toLowerCase() === "wednesday") {
                 document.querySelector('.cover').style.opacity = '0';
                 setTimeout(() => document.querySelector('.cover').style.display = 'none', 500);
                 document.querySelector('.hidden-message').style.display = 'block';
